@@ -12,6 +12,9 @@ const EAGER_MODULES = [
   '../core/recipes/options',
   '../core/build',
   '../core/resolve',
+  '../core/codec',
+  '../core/encode',
+  '../core/stats',
 ];
 const DOM_GLOBALS = ['window', 'document', 'navigator', 'localStorage', 'sessionStorage'];
 

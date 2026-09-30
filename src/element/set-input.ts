@@ -1,4 +1,4 @@
-import { decodeSet } from '../core/codec';
+import { decodeSet } from '../core/decode';
 import { DEFAULT_FRAME_MS, GRID_MAX, GRID_MIN } from '../core/constants';
 import { isFrameDuration, isGridSide } from '../core/frame';
 import { isRecipeId } from '../core/recipes/ids';

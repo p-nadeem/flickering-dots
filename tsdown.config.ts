@@ -13,6 +13,7 @@ export default defineConfig({
   dts: true,
   clean: true,
   unbundle: true,
+  minify: true,
   publint: true,
   attw: { profile: 'node16' },
   inputOptions: {

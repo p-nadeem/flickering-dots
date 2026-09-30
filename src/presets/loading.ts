@@ -1,4 +1,4 @@
-import { frameFromRows } from '../core/codec';
+import { frameFromRows } from '../core/decode';
 import type { IndicatorSet } from '../core/types';
 import { BUILTIN, CHECK_STATE, CROSS_STATE, IDLE_STATE } from './shared';
 

@@ -1,5 +1,5 @@
 import { isOneShotState } from '../core/one-shot';
-import { stillFrame } from '../core/stats';
+import { stillFrame } from '../core/frame-stats';
 import type { Clip, GridSize } from '../core/types';
 import { createPlayer } from '../player/create-player';
 import type { Clock, Player } from '../player/types';
