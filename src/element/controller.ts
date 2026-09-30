@@ -6,7 +6,15 @@ import type { Clock, Player } from '../player/types';
 import type { DotsContent } from './content';
 import { getNextState, getTransitionKind, loadContent } from './content';
 import type { PropMap, PropName } from './props';
-import { createPropMap, isFlagOn, readLabel, readNumber, toPropKey, withProp } from './props';
+import {
+  createPropMap,
+  getErrorMessage,
+  isFlagOn,
+  readLabel,
+  readNumber,
+  toPropKey,
+  withProp,
+} from './props';
 import type { CellElement, DotsLook, GridElement, GridRenderer } from './render';
 import { createGridRenderer } from './render';
 import type { ElementTuning } from './tuning';
@@ -189,10 +197,23 @@ function playTransition(context: Context, content: DotsContent): void {
   context.write({ cancelTransition });
 }
 
+function rebuildWhenLoaded(context: Context, key: string, pending: Promise<void>): void {
+  pending.then(
+    () => {
+      const { build, isConnected } = context.read();
+      if (!isConnected || build?.key !== key) return;
+      context.write({ build: null });
+      schedule(context);
+    },
+    (error: unknown) => reportError(context, getErrorMessage(error)),
+  );
+}
+
 function rebuild(context: Context, key: string, tuning: ElementTuning, isReduced: boolean): void {
   const { props, build: previous, isPendingTransition } = context.read();
-  const { content, error } = loadContent(props, tuning.direction);
+  const { content, error, pending } = loadContent(props, tuning.direction);
   if (error !== null) reportError(context, error);
+  if (pending !== null) rebuildWhenLoaded(context, key, pending);
   const shouldTransition =
     !isReduced && isPendingTransition && previous !== null && isSameGrid(previous.content.clip, content.clip);
   stopPlayback(context);

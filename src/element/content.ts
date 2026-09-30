@@ -1,10 +1,12 @@
 import { applyDirection } from '../core/apply-direction';
-import { build } from '../core/build';
+import { createBuild } from '../core/builder';
 import { directedFinalMarkFrame } from '../core/one-shot';
-import { resolve } from '../core/resolve';
+import { getLoadedRecipe } from '../core/recipes/store';
+import { createResolve } from '../core/resolver';
 import { stateNames } from '../core/state-names';
 import type { Clip, GridSize, IndicatorSet, PlayDirection, StateName, Transition } from '../core/types';
-import { getPreset } from '../presets';
+import { getLoadedPreset } from '../presets/store';
+import { DEFAULT_SET_ID, findPendingLoad, loadDefaultPreset, readPlaceholder } from './loading';
 import type { PropMap } from './props';
 import { createElementError, getErrorMessage, isRecord, readJson, readNumber, readText } from './props';
 import { toClip, toIndicatorSet } from './set-input';
@@ -23,9 +25,9 @@ type RawContent = Omit<DotsContent, 'mark'>;
 export interface ContentResult {
   readonly content: DotsContent;
   readonly error: string | null;
+  readonly pending: Promise<void> | null;
 }
 
-const DEFAULT_SET_ID = 'pulse';
 const DEFAULT_RECIPE_SIDE = 7;
 const FRAMES_LABEL = 'dots';
 const TRANSITIONS: readonly Transition[] = ['cut', 'flip', 'crossfade'];
@@ -35,8 +37,16 @@ interface GridOverride {
   readonly rows: number | null;
 }
 
+const build = createBuild((recipe) => {
+  const unit = getLoadedRecipe(recipe);
+  if (unit === undefined) throw createElementError(`the recipe "${recipe}" has not loaded`);
+  return unit;
+});
+
+const resolve = createResolve(build);
+
 function getDefaultSet(): IndicatorSet {
-  const preset = getPreset(DEFAULT_SET_ID);
+  const preset = getLoadedPreset(DEFAULT_SET_ID);
   if (preset === undefined) throw createElementError(`the default preset "${DEFAULT_SET_ID}" is missing`);
   return preset;
 }
@@ -107,11 +117,28 @@ function readFallback(props: PropMap): RawContent {
   return { clip, state: resolvedState, on: on ?? null, set: getDefaultSet(), label: resolvedState };
 }
 
+function fromPlaceholder(props: PropMap, presetId?: string): RawContent {
+  const { clip, state, label } = readPlaceholder(props, presetId);
+  return { clip, state, on: null, set: null, label };
+}
+
 export function loadContent(props: PropMap, direction: PlayDirection): ContentResult {
+  const pending = findPendingLoad(props);
+  if (pending !== null)
+    return { content: withDirection(fromPlaceholder(props), direction), error: null, pending };
   try {
-    return { content: withDirection(readContent(props), direction), error: null };
+    return { content: withDirection(readContent(props), direction), error: null, pending: null };
   } catch (error) {
-    return { content: withDirection(readFallback(props), direction), error: getErrorMessage(error) };
+    const message = getErrorMessage(error);
+    const fallback = loadDefaultPreset();
+    if (fallback !== null) {
+      return {
+        content: withDirection(fromPlaceholder(props, DEFAULT_SET_ID), direction),
+        error: message,
+        pending: fallback,
+      };
+    }
+    return { content: withDirection(readFallback(props), direction), error: message, pending: null };
   }
 }
 

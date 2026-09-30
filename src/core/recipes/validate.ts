@@ -11,6 +11,8 @@ const VOWEL_START = /^[aeiou]/i;
 
 type TextParam = (typeof TEXT_PARAMS)[number];
 
+export const NO_GLYPHS: readonly string[] = [];
+
 /** Values a recipe accepts for `variant` and `glyph`; an absent entry accepts any text. */
 export interface RecipeOptionRules {
   variants?: readonly string[];

@@ -6,6 +6,8 @@ import { limitFlashRate } from './flash-safe';
 import { generateMetaball } from './metaball';
 import { generateMetaballDrip, generateMetaballMerge } from './metaball-moments';
 import { generateSpiral, generateSpiralUnwind } from './spiral';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 /** Variants of the `shader` recipe: lava lamp metaballs, the corridor tunnel and the spiral wave. */
 export const SHADER_VARIANTS = [
@@ -61,3 +63,5 @@ export function generateShader(grid: GridSize, params: RecipeParams = {}): Recip
   const engine = ENGINES[variant];
   return limitFlashRate(engine.generate(grid, params), engine.isLoop);
 }
+
+export const SHADER_OPTIONS: RecipeOptionRules = { variants: SHADER_VARIANTS, glyphs: NO_GLYPHS };

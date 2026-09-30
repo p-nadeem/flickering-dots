@@ -6,6 +6,8 @@ import { generateOrreryAlign, generateOrreryEscape } from './orrery-results';
 import { generateCollapse, generateFlatline } from './scope-results';
 import { generateSpiro, generateSpiroProgress, generateSpiroRest } from './spiro';
 import { generateSpiroComplete, generateSpiroCrumble } from './spiro-results';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 /** Variants of the `trace` recipe: scope figures, the spirograph rosette and the orrery. */
 export const TRACE_VARIANTS = [
@@ -64,3 +66,5 @@ export function generateTrace(grid: GridSize, params: RecipeParams = {}): Recipe
   }
   return VARIANT_BUILDERS[variant](grid, params);
 }
+
+export const TRACE_OPTIONS: RecipeOptionRules = { variants: TRACE_VARIANTS, glyphs: NO_GLYPHS };

@@ -4,6 +4,15 @@ import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettier from 'eslint-config-prettier';
 
+const EAGER_MODULES = [
+  '../presets',
+  '../presets/index',
+  '../core/recipes',
+  '../core/recipes/index',
+  '../core/recipes/options',
+  '../core/build',
+  '../core/resolve',
+];
 const DOM_GLOBALS = ['window', 'document', 'navigator', 'localStorage', 'sessionStorage'];
 
 export default tseslint.config(
@@ -26,9 +35,30 @@ export default tseslint.config(
     rules: { 'no-restricted-globals': ['error', ...DOM_GLOBALS] },
   },
   {
+    files: ['src/element/**/*.ts', 'src/react/**/*.ts', 'src/player/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: EAGER_MODULES.map((name) => ({
+            name,
+            message:
+              'The render path loads presets and recipes lazily; use presets/store or core/recipes/store.',
+          })),
+        },
+      ],
+    },
+  },
+  {
     files: ['compat/*.mjs'],
     languageOptions: {
-      globals: { console: 'readonly', process: 'readonly', URL: 'readonly', document: 'readonly' },
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        URL: 'readonly',
+        document: 'readonly',
+        setTimeout: 'readonly',
+      },
     },
   },
   prettier,

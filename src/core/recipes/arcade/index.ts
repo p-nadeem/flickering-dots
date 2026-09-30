@@ -2,6 +2,8 @@ import type { GridSize, RecipeParams } from '../../types';
 import type { RecipeFn, RecipeOutput } from '../helpers';
 import { VARIANTS_A } from './variants-a';
 import { VARIANTS_B } from './variants-b';
+import type { RecipeOptionRules } from '../validate';
+import { DICE_FACES } from './dice-faces';
 
 const VARIANTS: Readonly<Record<string, RecipeFn>> = { ...VARIANTS_A, ...VARIANTS_B };
 
@@ -20,3 +22,5 @@ export function generateArcade(grid: GridSize, params: RecipeParams = {}): Recip
   if (!Object.hasOwn(VARIANTS, variant)) throw unknownVariant(variant);
   return VARIANTS[variant](grid, { ...params, variant });
 }
+
+export const ARCADE_OPTIONS: RecipeOptionRules = { variants: ARCADE_VARIANTS, glyphs: DICE_FACES };

@@ -1,10 +1,10 @@
 import { decodeSet } from '../core/codec';
 import { DEFAULT_FRAME_MS, GRID_MAX, GRID_MIN } from '../core/constants';
 import { isFrameDuration, isGridSide } from '../core/frame';
-import { isRecipeId } from '../core/recipes';
+import { isRecipeId } from '../core/recipes/ids';
 import { assertRecipeParams } from '../core/recipes/validate';
 import type { Bit, Clip, Frame, GridSize, IndicatorSet, RecipeId, StateDef, Transition } from '../core/types';
-import { getPreset } from '../presets';
+import { getLoadedPreset, getPresetEntry } from '../presets/store';
 import { createElementError, getErrorMessage, isRecord, readJson } from './props';
 
 type Fields = Readonly<Record<string, unknown>>;
@@ -147,8 +147,10 @@ function decodeSetData(fields: Fields): IndicatorSet {
 }
 
 function findPreset(id: string): IndicatorSet {
-  const preset = getPreset(id.trim());
-  if (preset === undefined) throw createElementError(`there is no preset called "${id}"`);
+  const key = id.trim();
+  if (getPresetEntry(key) === undefined) throw createElementError(`there is no preset called "${id}"`);
+  const preset = getLoadedPreset(key);
+  if (preset === undefined) throw createElementError(`the preset "${key}" has not loaded`);
   return preset;
 }
 

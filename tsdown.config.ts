@@ -12,6 +12,7 @@ export default defineConfig({
   target: 'es2022',
   dts: true,
   clean: true,
+  unbundle: true,
   publint: true,
   attw: { profile: 'node16' },
   inputOptions: {
