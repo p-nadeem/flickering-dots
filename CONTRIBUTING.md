@@ -4,6 +4,8 @@ Thanks for helping. The short version: put code in the right folder, add a test,
 
 This repo is the runtime only. The editor, generators and exporters live in a separate private repo.
 
+This project follows the [Code of Conduct](CODE_OF_CONDUCT.md). Report security issues privately, as described in [SECURITY.md](SECURITY.md).
+
 ## Setup
 
 ```bash

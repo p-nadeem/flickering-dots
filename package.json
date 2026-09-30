@@ -1,6 +1,6 @@
 {
   "name": "flickering-dots",
-  "version": "0.1.1",
+  "version": "0.0.0",
   "description": "Dot-matrix loading, thinking and typing indicators for AI chat and agent UIs. 85 animated presets for React, Vue, Svelte or plain HTML. Zero dependencies.",
   "license": "MIT",
   "author": "Nadeem Pullisseri",
@@ -91,8 +91,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "changeset": "changeset",
-    "version": "changeset version",
-    "release": "pnpm build && changeset publish",
     "prepare": "husky",
     "compat": "node compat/run.mjs",
     "gen:manifest": "UPDATE_MANIFEST=1 vitest run test/presets/manifest.test.ts",
@@ -108,7 +106,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
-    "@changesets/cli": "^2.27.10",
+    "@changesets/cli": "^3.0.3",
     "@eslint/js": "^9.17.0",
     "@types/node": "^22.20.4",
     "@types/react": "^19.3.0",
