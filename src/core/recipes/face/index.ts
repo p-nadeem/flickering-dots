@@ -5,6 +5,8 @@ import { generateRead, generateSleepy, generateWide } from './gaze';
 import { getFaceLayout } from './layout';
 import type { FaceLayout } from './layout';
 import { generateAngry, generateHappy } from './moods';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 /** Variants of the `face` recipe, the robot eyes engine. */
 export const FACE_VARIANTS = ['glance', 'sleepy', 'wide', 'read', 'happy', 'angry'] as const;
@@ -38,3 +40,5 @@ export function generateFace(grid: GridSize, params: RecipeParams = {}): RecipeO
   }
   return BUILDERS[variant](getFaceLayout(grid), params.seed ?? FACE_DEFAULTS.seed);
 }
+
+export const FACE_OPTIONS: RecipeOptionRules = { variants: FACE_VARIANTS, glyphs: NO_GLYPHS };

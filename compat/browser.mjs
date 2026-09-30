@@ -48,6 +48,25 @@ async function countDots(browser, url) {
   const dots = await page.evaluate(
     () => document.querySelector('flickering-dots')?.shadowRoot?.querySelectorAll('.c').length ?? 0,
   );
+  await page.evaluate(
+    (timeout) =>
+      new Promise((resolve, reject) => {
+        const read = () =>
+          [...(document.querySelector('flickering-dots')?.shadowRoot?.querySelectorAll('.c') ?? [])]
+            .map((cell) => cell.style.background)
+            .join('|');
+        const first = read();
+        const started = Date.now();
+        const poll = () => {
+          if (read() !== first) resolve();
+          else if (Date.now() - started > timeout)
+            reject(new Error('the animation never advanced past its first frame'));
+          else setTimeout(poll, 50);
+        };
+        poll();
+      }),
+    DOT_TIMEOUT_MS,
+  );
   await page.close();
   return { dots, errors };
 }
@@ -62,7 +81,7 @@ export async function checkPages(pages, browserNames) {
       try {
         const { dots, errors } = await countDots(browser, `http://127.0.0.1:${port}/`);
         const status = errors.length === 0 ? 'ok' : `errors: ${errors.join(' | ')}`;
-        console.log(`${browserName.padEnd(8)} ${name.padEnd(12)} ${dots} dots, ${status}`);
+        console.log(`${browserName.padEnd(8)} ${name.padEnd(12)} ${dots} dots, animating, ${status}`);
         if (errors.length > 0) failures.push(`${browserName}/${name}`);
       } catch (error) {
         console.log(`${browserName.padEnd(8)} ${name.padEnd(12)} FAILED: ${error.message.split('\n')[0]}`);

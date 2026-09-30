@@ -18,6 +18,8 @@ import {
   generateSynapseRest,
   generateSynapseTrain,
 } from './synapse';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 /** Variants of the `network` recipe, the values `params.variant` accepts. */
 export const NETWORK_VARIANTS = [
@@ -84,3 +86,5 @@ export function generateNetwork(grid: GridSize, params: RecipeParams = {}): Reci
   const seed = params.seed ?? NETWORK_DEFAULTS.seed;
   return BUILDERS[variant](grid, { seed, length: params.length });
 }
+
+export const NETWORK_OPTIONS: RecipeOptionRules = { variants: NETWORK_VARIANTS, glyphs: NO_GLYPHS };

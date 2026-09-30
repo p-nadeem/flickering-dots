@@ -10,6 +10,8 @@ import {
   generateHourglassSlow,
 } from './hourglass';
 import { generateHourglassDone, generateHourglassJam } from './hourglass-results';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 /** Variants of the granular recipe: the hourglass family and the snow drift family. */
 export const GRANULAR_VARIANTS = [
@@ -62,3 +64,5 @@ export function generateGranular(grid: GridSize, params: RecipeParams = {}): Rec
   }
   return GENERATORS[variant](grid, { ...params, seed: params.seed ?? GRANULAR_DEFAULTS.seed });
 }
+
+export const GRANULAR_OPTIONS: RecipeOptionRules = { variants: GRANULAR_VARIANTS, glyphs: NO_GLYPHS };

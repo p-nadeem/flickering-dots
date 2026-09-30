@@ -7,6 +7,8 @@ import { generateBurst, generateDud, generateEmber, generateFuse } from './firew
 import { FOUNTAIN_BUILDERS } from './fountain';
 import type { ParticlesBuilder } from './steps';
 import { WARP_BUILDERS } from './warp';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 /** Variants of the `particles` recipe, one engine for the fireworks, fountain, hyperspace, fireflies and droplet sets. */
 export const PARTICLES_VARIANTS = [
@@ -63,3 +65,5 @@ export function generateParticles(grid: GridSize, params: RecipeParams = {}): Re
   }
   return limitFlashRate(grid, BUILDERS[variant](grid, params, params.seed ?? PARTICLES_DEFAULTS.seed));
 }
+
+export const PARTICLES_OPTIONS: RecipeOptionRules = { variants: PARTICLES_VARIANTS, glyphs: NO_GLYPHS };

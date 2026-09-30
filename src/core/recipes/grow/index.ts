@@ -6,6 +6,8 @@ import { FLOOD_VARIANTS, generateFlood } from './flood';
 import { DEFAULT_SEED } from './lattice';
 import { LEADER_VARIANTS, generateLeader } from './leader';
 import { MAZE_VARIANTS, generateMaze } from './maze';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 type Engine = (grid: GridSize, params: RecipeParams, variant: string) => RecipeOutput;
 
@@ -47,3 +49,5 @@ export function generateGrow(grid: GridSize, params: RecipeParams = {}): RecipeO
   const variant = params.variant ?? GROW_DEFAULTS.variant;
   return engineFor(variant)(grid, params, variant);
 }
+
+export const GROW_OPTIONS: RecipeOptionRules = { variants: GROW_VARIANTS, glyphs: NO_GLYPHS };

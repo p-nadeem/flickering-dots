@@ -10,8 +10,9 @@ import {
   generateSpotsLabyrinth,
   generateSpotsPulse,
 } from './spots';
-import { AUTOMATON_DEFAULTS, AUTOMATON_VARIANTS, isAutomatonVariant } from './variants';
+import { AUTOMATON_DEFAULTS, AUTOMATON_GLYPHS, AUTOMATON_VARIANTS, isAutomatonVariant } from './variants';
 import type { AutomatonVariant } from './variants';
+import type { RecipeOptionRules } from '../validate';
 
 export { AUTOMATON_DEFAULTS, AUTOMATON_GLYPHS, AUTOMATON_VARIANTS, isAutomatonVariant } from './variants';
 export type { AutomatonVariant } from './variants';
@@ -47,3 +48,8 @@ export function generateAutomaton(grid: GridSize, params: RecipeParams = {}): Re
   }
   return VARIANTS[variant](grid, params);
 }
+
+export const AUTOMATON_OPTIONS: RecipeOptionRules = {
+  variants: AUTOMATON_VARIANTS,
+  glyphs: AUTOMATON_GLYPHS,
+};

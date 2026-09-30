@@ -16,6 +16,7 @@ import { generateGranular } from './granular';
 import { generateGrow } from './grow';
 import { generateHeart } from './heart';
 import type { RecipeFn } from './helpers';
+import { isRecipeId } from './ids';
 import { generateHop } from './hop';
 import { generateIdle } from './idle';
 import { generateLife } from './life';
@@ -39,6 +40,7 @@ import { generateTypewriter } from './typewriter';
 import { generateWave } from './wave';
 
 export type { RecipeFn, RecipeOutput } from './helpers';
+export { isRecipeId } from './ids';
 
 const REGISTRY: Readonly<Record<RecipeId, RecipeFn>> = {
   pulse: generatePulse,
@@ -115,11 +117,6 @@ export const RECIPES: readonly RecipeInfo[] = [
   { id: 'granular', label: 'Hourglass', params: { variant: 'hourglass' } },
   { id: 'face', label: 'Robot eyes', params: { variant: 'glance' } },
 ];
-
-/** True when `id` names a registered recipe. */
-export function isRecipeId(id: string): id is RecipeId {
-  return Object.hasOwn(REGISTRY, id);
-}
 
 /** Returns the generator for a recipe id. Unknown ids fall back to `pulse`. */
 export function getRecipe(id: RecipeId | (string & {})): RecipeFn {

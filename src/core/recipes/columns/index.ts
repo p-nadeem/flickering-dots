@@ -1,6 +1,8 @@
 import type { RecipeFn } from '../helpers';
 import { VARIANTS_A } from './variants-a';
 import { VARIANTS_B } from './variants-b';
+import type { RecipeOptionRules } from '../validate';
+import { NO_GLYPHS } from '../validate';
 
 const DEFAULT_VARIANT = 'pendulum';
 
@@ -23,3 +25,5 @@ export const generateColumns: RecipeFn = (grid, params) => {
   }
   return VARIANTS[variant](grid, params);
 };
+
+export const COLUMNS_OPTIONS: RecipeOptionRules = { variants: COLUMNS_VARIANTS, glyphs: NO_GLYPHS };

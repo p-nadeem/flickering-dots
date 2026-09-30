@@ -8,6 +8,7 @@ import type { CoinFaces } from './coin';
 import { cubeLand, cubeRest, cubeShake, cubeSpin, cubeWait } from './cube';
 import { globeBreak, globeListen, globeSettle, globeSpin } from './globe';
 import { torusDrop, torusFront, torusSlow, torusTumble } from './torus';
+import type { RecipeOptionRules } from '../validate';
 
 /** Variants of the `projection` recipe: wireframe cube, globe, dithered torus, coin and point cloud moments. */
 export const PROJECTION_VARIANTS = [
@@ -113,3 +114,8 @@ export function generateProjection(grid: GridSize, params: RecipeParams = {}): R
   }
   return VARIANTS[variant](grid, params);
 }
+
+export const PROJECTION_OPTIONS: RecipeOptionRules = {
+  variants: PROJECTION_VARIANTS,
+  glyphs: PROJECTION_GLYPHS,
+};

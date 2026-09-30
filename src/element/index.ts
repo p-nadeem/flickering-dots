@@ -1,6 +1,7 @@
 /** `flickering-dots/element`: the `<flickering-dots>` custom element. */
 import { createDotsElementClass } from './dots-element';
 
+export { preloadPresets } from '../presets/store';
 export { playDotClick, setDotSoundEnabled } from './sound';
 export type { DotsElement, DotsElementProperties, DotsFlag, DotsNumber } from './types';
 
