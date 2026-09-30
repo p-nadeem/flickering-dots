@@ -1,6 +1,6 @@
 {
   "name": "flickering-dots",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Dot-matrix loading, thinking and typing indicators for AI chat and agent UIs. 85 animated presets for React, Vue, Svelte or plain HTML. Zero dependencies.",
   "license": "MIT",
   "author": "Nadeem Pullisseri",
