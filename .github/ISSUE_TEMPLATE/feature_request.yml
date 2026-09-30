@@ -1,0 +1,16 @@
+name: Feature request
+description: A new preset, prop, attribute or API
+labels: [enhancement]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: What would you like to do?
+      description: The problem first, then the API you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example
+      description: A few lines of code, a sketch or a screenshot.

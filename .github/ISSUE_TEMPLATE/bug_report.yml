@@ -1,0 +1,36 @@
+name: Bug report
+description: An animation renders, plays or types wrongly
+labels: [bug]
+body:
+  - type: dropdown
+    id: entry
+    attributes:
+      label: Which entry point?
+      options:
+        - flickering-dots/react
+        - flickering-dots/element
+        - flickering-dots (core)
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: A few lines of code, or a link to a CodeSandbox / StackBlitz.
+      render: tsx
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: flickering-dots version, framework + version, browser + version
+      placeholder: flickering-dots 0.1.0, React 19.3, Chrome 141
+    validations:
+      required: true

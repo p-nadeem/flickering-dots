@@ -1,0 +1,21 @@
+/** `flickering-dots`: the framework-agnostic core (types, codec, recipes, presets, player). */
+export type * from './core/types';
+export { DEFAULT_FRAME_MS, DEFAULT_TUNING, GRID_MAX, GRID_MIN, STATE_ORDER } from './core/constants';
+export { RECIPES } from './core/recipes';
+export { getRecipeOptions, RECIPE_OPTIONS } from './core/recipes/options';
+export type { RecipeOptionRules } from './core/recipes/validate';
+export { GLYPH_NAMES, glyphMask, isGlyphName } from './core/glyphs';
+export type { GlyphName } from './core/glyphs';
+export { build } from './core/build';
+export { resolve } from './core/resolve';
+export { applyDirection } from './core/apply-direction';
+export { busiestFrame, stats, stillFrame } from './core/stats';
+export { stateNames } from './core/state-names';
+export { directedFinalMarkFrame, finalMarkFrame, isOneShotState } from './core/one-shot';
+export { cellIndex, countLit, createFrame, framesEqual } from './core/frame';
+export { decodeSet, encodeSet, frameFromRows, parseGridArray, rowsOf } from './core/codec';
+export { createRng } from './core/rng';
+export { MARK, markSvg } from './core/mark';
+export { COLLECTIONS, getPreset, INTENTS, PRESETS } from './presets';
+export { createPlayer } from './player';
+export type { Clock, Player, PlayerOptions } from './player';

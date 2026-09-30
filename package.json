@@ -1,0 +1,118 @@
+{
+  "name": "flickering-dots",
+  "version": "0.1.0",
+  "description": "Dot-matrix loading, thinking and typing indicators for AI chat and agent UIs. 85 animated presets for React, Vue, Svelte or plain HTML. Zero dependencies.",
+  "license": "MIT",
+  "author": "Nadeem Pullisseri",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    },
+    "./element": {
+      "types": "./dist/element.d.ts",
+      "import": "./dist/element.js",
+      "require": "./dist/element.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "spinner",
+    "loader",
+    "loading",
+    "loading-indicator",
+    "loading-animation",
+    "thinking-indicator",
+    "typing-indicator",
+    "status-indicator",
+    "ai",
+    "llm",
+    "chat-ui",
+    "agent",
+    "dot-matrix",
+    "flip-dot",
+    "react",
+    "react-spinner",
+    "web-components",
+    "custom-elements",
+    "vue",
+    "svelte"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish",
+    "prepare": "husky"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "prettier": "^3.4.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.18.0",
+    "vite": "^6.4.3",
+    "vitest": "^5.0.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,json,yml,yaml,css}": [
+      "prettier --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p-nadeem/flickering-dots.git"
+  },
+  "homepage": "https://github.com/p-nadeem/flickering-dots",
+  "bugs": "https://github.com/p-nadeem/flickering-dots/issues",
+  "publishConfig": {
+    "access": "public"
+  }
+}
