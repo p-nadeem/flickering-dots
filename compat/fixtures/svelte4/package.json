@@ -1,0 +1,16 @@
+{
+  "name": "compat-svelte4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.1.2",
+    "svelte": "^4.2.20",
+    "vite": "^5.4.21"
+  },
+  "compat": {
+    "page": "dist"
+  }
+}

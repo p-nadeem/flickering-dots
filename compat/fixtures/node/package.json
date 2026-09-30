@@ -1,0 +1,11 @@
+{
+  "name": "compat-node",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node check.mjs && node check.cjs"
+  },
+  "dependencies": {
+    "react": "^19.3.0"
+  }
+}

@@ -7,7 +7,7 @@ import prettier from 'eslint-config-prettier';
 const DOM_GLOBALS = ['window', 'document', 'navigator', 'localStorage', 'sessionStorage'];
 
 export default tseslint.config(
-  { ignores: ['**/dist/**', '**/node_modules/**', '**/*.config.*'] },
+  { ignores: ['**/dist/**', '**/node_modules/**', '**/*.config.*', 'compat/fixtures/**'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -24,6 +24,12 @@ export default tseslint.config(
   {
     files: ['src/core/**/*.ts', 'src/presets/**/*.ts', 'src/player/**/*.ts'],
     rules: { 'no-restricted-globals': ['error', ...DOM_GLOBALS] },
+  },
+  {
+    files: ['compat/*.mjs'],
+    languageOptions: {
+      globals: { console: 'readonly', process: 'readonly', URL: 'readonly', document: 'readonly' },
+    },
   },
   prettier,
 );
