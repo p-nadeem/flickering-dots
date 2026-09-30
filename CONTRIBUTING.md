@@ -35,6 +35,9 @@ Imports flow one way: `react` → `element` → `player`, `presets` → `core`. 
 | `pnpm typecheck`            | `tsc --noEmit`                                 |
 | `pnpm lint` / `pnpm format` | ESLint / Prettier                              |
 | `pnpm build`                | ESM + CJS + types into `dist/`                 |
+| `pnpm size`                 | Checks bundle-size budgets (after a build)     |
+| `pnpm compat`               | Builds sample apps against the packed package  |
+| `pnpm gen:manifest`         | Regenerates `src/presets/manifest.ts`          |
 | `pnpm dev`                  | Rebuilds `dist/` on change                     |
 | `pnpm changeset`            | Records a user-facing change for the changelog |
 
@@ -43,7 +46,7 @@ Imports flow one way: `react` → `element` → `player`, `presets` → `core`. 
 1. Branch from `main`: `feat/<topic>`, `fix/<topic>`, `docs/<topic>`, `chore/<topic>`.
 2. Put code where the structure rules say it goes. `core/`, `presets/` and `player/` have no DOM.
 3. Add or update the test at the mirrored path in `test/`.
-4. Run `pnpm typecheck && pnpm lint && pnpm test && pnpm build` locally.
+4. Run `pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm size` locally.
 5. If you changed anything in `src/`, run `pnpm changeset` and commit the generated file.
 6. Open a PR. CI must be green; a maintainer will squash-merge.
 
@@ -53,7 +56,7 @@ Conventional Commits: `type(scope): summary`, e.g. `feat(core): add pingPong opt
 
 ## Adding a preset
 
-Presets are data, typed with the core types. Add the set to the matching file in `src/presets/` (or `src/presets/wow/`), keep its `id` unique, and give it a name, a one-line description and tags. Its tests go in `test/presets/`.
+Presets are data, typed with the core types. Add the set to the matching file in `src/presets/` (or `src/presets/wow/`), keep its `id` unique, and give it a name, a one-line description and tags. Then run `pnpm gen:manifest`: the manifest lets the element load each preset on demand and show its first frame while it loads, and a test fails when it is out of date. Its tests go in `test/presets/`.
 
 ## Reporting bugs
 

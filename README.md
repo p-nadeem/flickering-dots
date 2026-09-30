@@ -38,6 +38,8 @@ defineDotsElement();
 <flickering-dots set="radar" state="thinking" size="32"></flickering-dots>
 ```
 
+Or import `flickering-dots/element/define`, which registers the element as a side effect: handy in a plain `<script type="module">`.
+
 In Vue, tell the compiler the tag is a custom element: `compilerOptions.isCustomElement: (tag) => tag === 'flickering-dots'`.
 
 ## Presets and states
@@ -62,7 +64,19 @@ Most presets have all four standard states. Many add their own, such as `waiting
 
 </details>
 
-`PRESETS`, `COLLECTIONS` and `INTENTS` from `flickering-dots` list every preset with its name, description, states and tags, so you can build your own picker.
+### Loading and size
+
+Presets load on demand. `DotIndicator` or the element costs about 14 kB gzip up front; the first time a preset id is used, just that preset and the recipes it draws with are fetched (a few kB for most presets), and until then the element shows the preset's first frame. To fetch presets ahead of time, so they start animating immediately:
+
+```ts
+import { preloadPresets } from 'flickering-dots/element';
+
+preloadPresets('pulse', 'radar');
+```
+
+A set object you pass yourself renders as soon as its recipes are loaded, and a set made only of frames renders at once.
+
+`PRESETS`, `COLLECTIONS` and `INTENTS` from `flickering-dots` list every preset with its name, description, states and tags, so you can build your own picker. Importing them includes every preset in your bundle.
 
 ## Props and attributes
 
@@ -110,7 +124,7 @@ import { decodeSet, encodeSet, build, createPlayer } from 'flickering-dots';
 
 ## Server rendering
 
-`DotIndicator` uses effects, so in the Next.js App Router use it from a Client Component (a file with `'use client'`). On the server it renders an empty `<flickering-dots>` tag, which draws once the page hydrates. Every entry point can be imported in Node without a DOM.
+`DotIndicator` works in the Next.js App Router and other React Server Components setups: the React entry is marked `'use client'`, so you can use it straight from a server component. On the server it renders an empty `<flickering-dots>` tag, which draws once the page hydrates. Every entry point can be imported in Node without a DOM.
 
 ## Accessibility
 

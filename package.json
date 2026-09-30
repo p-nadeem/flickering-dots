@@ -95,7 +95,8 @@
     "release": "pnpm build && changeset publish",
     "prepare": "husky",
     "compat": "node compat/run.mjs",
-    "gen:manifest": "UPDATE_MANIFEST=1 vitest run test/presets/manifest.test.ts"
+    "gen:manifest": "UPDATE_MANIFEST=1 vitest run test/presets/manifest.test.ts",
+    "size": "node scripts/size.mjs"
   },
   "peerDependencies": {
     "react": ">=17"
@@ -109,10 +110,10 @@
     "@arethetypeswrong/cli": "^0.18.5",
     "@changesets/cli": "^2.27.10",
     "@eslint/js": "^9.17.0",
-    "@size-limit/preset-small-lib": "^14.1.0",
     "@types/node": "^22.20.4",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "esbuild": "^0.27.7",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.1.0",
@@ -124,7 +125,6 @@
     "publint": "^0.3.24",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "size-limit": "^14.1.0",
     "tsdown": "^0.23.0",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.18.0",

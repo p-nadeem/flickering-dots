@@ -53,7 +53,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['compat/*.mjs'],
+    files: ['compat/*.mjs', 'scripts/*.mjs'],
     languageOptions: {
       globals: {
         console: 'readonly',
