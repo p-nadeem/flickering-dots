@@ -64,7 +64,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "pnpm build && changeset publish",
-    "prepare": "husky"
+    "prepare": "husky",
+    "compat": "node compat/run.mjs"
   },
   "peerDependencies": {
     "react": ">=17"
@@ -85,6 +86,7 @@
     "happy-dom": "^20.14.5",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
+    "playwright": "^1.63.0",
     "prettier": "^3.4.2",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",

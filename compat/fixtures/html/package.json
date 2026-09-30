@@ -1,0 +1,10 @@
+{
+  "name": "compat-html",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"require('fs').cpSync('node_modules/flickering-dots/dist','public/dist',{recursive:true})\""
+  },
+  "compat": {
+    "page": "public"
+  }
+}
