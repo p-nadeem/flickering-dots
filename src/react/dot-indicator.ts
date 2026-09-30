@@ -83,5 +83,9 @@ export function DotIndicator(props: DotIndicatorProps): React.ReactElement {
     defineDotsElement();
   }, []);
 
-  return React.createElement(DOTS_TAG, { ref: elementRef, class: props.className });
+  return React.createElement(DOTS_TAG, {
+    ref: elementRef,
+    class: props.className,
+    suppressHydrationWarning: true,
+  });
 }
