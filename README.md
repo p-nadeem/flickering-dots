@@ -4,8 +4,10 @@
 
 Dot-matrix loading, thinking and typing indicators for AI chat and agent UIs. 85 animated presets, a React component and a `<flickering-dots>` web component for Vue, Svelte, Angular or plain HTML. Zero dependencies.
 
+Website: [flickering-dots.dev](https://flickering-dots.dev/)
+
 [![npm](https://img.shields.io/npm/v/flickering-dots)](https://www.npmjs.com/package/flickering-dots)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/flickering-dots)](https://bundlephobia.com/package/flickering-dots)
+[![minzipped size](https://img.shields.io/badge/minzipped-%3C15%20kB-blue)](https://github.com/p-nadeem/flickering-dots/blob/main/scripts/size.mjs)
 [![CI](https://github.com/p-nadeem/flickering-dots/actions/workflows/ci.yml/badge.svg)](https://github.com/p-nadeem/flickering-dots/actions/workflows/ci.yml)
 
 ```bash

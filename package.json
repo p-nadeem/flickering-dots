@@ -146,7 +146,7 @@
     "type": "git",
     "url": "git+https://github.com/p-nadeem/flickering-dots.git"
   },
-  "homepage": "https://github.com/p-nadeem/flickering-dots",
+  "homepage": "https://flickering-dots.dev/",
   "bugs": "https://github.com/p-nadeem/flickering-dots/issues",
   "publishConfig": {
     "access": "public"
